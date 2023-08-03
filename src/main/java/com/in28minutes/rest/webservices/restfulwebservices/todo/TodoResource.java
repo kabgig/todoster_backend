@@ -43,7 +43,11 @@ public class TodoResource {
     public Todo createTodo(
             @PathVariable String username,
             @RequestBody Todo todo){
-        Todo createdTodo = todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), todo.isDone());
+        Todo createdTodo = todoService.addTodo(
+                username,
+                todo.getDescription(),
+                todo.getTargetDate(),
+                todo.isDone());
         return createdTodo;
     }
 }
