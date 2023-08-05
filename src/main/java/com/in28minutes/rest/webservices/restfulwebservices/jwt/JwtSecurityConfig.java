@@ -68,8 +68,7 @@ public class JwtSecurityConfig {
                                                 new BearerTokenAuthenticationEntryPoint())
                                         .accessDeniedHandler(
                                                 new BearerTokenAccessDeniedHandler()))
-                .httpBasic(
-                        Customizer.withDefaults()) // (5)
+                .httpBasic(Customizer.withDefaults()) // (5)
                 .headers(header -> header.frameOptions(frameOptions -> frameOptions.disable()))
                 .build();
     }
