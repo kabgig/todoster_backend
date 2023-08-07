@@ -1,11 +1,3 @@
+Use mysql-connector-j instead of mysql-connector-java if you are using Spring Boot 3.1 or greater.
 
-HOW?
-Add following line of code in public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) method of JwtSecurityConfig class.
-
-.requestMatchers(PathRequest.toH2Console()).permitAll()
-
-: HikariPool-1 - Starting...
-2023-08-05T17:38:14.109+08:00  INFO 44641 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:27cc80a0-c17c-4fec-b1af-cd47301b885d user=SA
-2023-08-05T17:38:14.110+08:00  INFO 44641 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-08-05T17:38:14.117+08:00  INFO 44641 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:27cc80a0-c17c-4fec-b1af-cd47301b885d'
-2023-08-05T17:38:14.227+08:00  INFO 44641 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+Remember: groupId is a little different (com.mysql instead of mysql)
