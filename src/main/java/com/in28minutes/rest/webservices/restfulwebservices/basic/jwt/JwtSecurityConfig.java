@@ -58,7 +58,7 @@ public class JwtSecurityConfig {
                                         .antMatchers(HttpMethod.OPTIONS, "/**")
                                         .permitAll()
                                         //.requestMatchers(PathRequest.toH2Console()).permitAll()
-                                        .mvcMatchers("/create/{username}/{password}").permitAll()
+                                        .mvcMatchers("/createuser/").permitAll()
                                         .anyRequest()
                                         .authenticated()) // (3)
                 .oauth2ResourceServer(
