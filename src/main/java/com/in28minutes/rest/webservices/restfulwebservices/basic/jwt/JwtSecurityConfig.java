@@ -1,4 +1,4 @@
-package com.in28minutes.rest.webservices.restfulwebservices.jwt;
+package com.in28minutes.rest.webservices.restfulwebservices.basic.jwt;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -53,11 +53,12 @@ public class JwtSecurityConfig {
                                         SessionCreationPolicy.STATELESS)) // (2)
                 .authorizeRequests(
                         auth ->
-                                auth.mvcMatchers("/authenticate", "/actuator", "/actuator/*")
+                                auth.mvcMatchers("/","/authenticate", "/actuator", "/actuator/*")
                                         .permitAll()
                                         .antMatchers(HttpMethod.OPTIONS, "/**")
                                         .permitAll()
                                         //.requestMatchers(PathRequest.toH2Console()).permitAll()
+                                        .mvcMatchers("/create/{username}/{password}").permitAll()
                                         .anyRequest()
                                         .authenticated()) // (3)
                 .oauth2ResourceServer(
