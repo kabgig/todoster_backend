@@ -5,28 +5,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//DISABLED!!!!
 //@RestController
-public class TodoResource {
+public class NotUsedTodoResource {
 
-    private TodoService todoService;
+    private NotUsedTodoService notUsedTodoService;
 
-    public TodoResource(TodoService todoService) {
-        this.todoService = todoService;
+    public NotUsedTodoResource(NotUsedTodoService notUsedTodoService) {
+        this.notUsedTodoService = notUsedTodoService;
     }
 
     @GetMapping("users/{username}/todos")
     public List<Todo> retrieveTodos(@PathVariable String username){
-        return todoService.findByUsername(username);
+        return notUsedTodoService.findByUsername(username);
     }
 
     @GetMapping("users/{username}/todos/{id}")
     public Todo retrieveTodo(@PathVariable String username, @PathVariable int id){
-        return todoService.findById(id);
+        return notUsedTodoService.findById(id);
     }
 
     @DeleteMapping("users/{username}/todos/{id}")
     public ResponseEntity<Object> deleteTodo(@PathVariable String username, @PathVariable int id){
-        todoService.deleteById(id);
+        notUsedTodoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -35,7 +36,7 @@ public class TodoResource {
             @PathVariable String username,
             @PathVariable int id,
             @RequestBody Todo todo){
-        todoService.updateTodo(todo);
+        notUsedTodoService.updateTodo(todo);
         return todo;
     }
 
@@ -43,7 +44,7 @@ public class TodoResource {
     public Todo createTodo(
             @PathVariable String username,
             @RequestBody Todo todo){
-        Todo createdTodo = todoService.addTodo(
+        Todo createdTodo = notUsedTodoService.addTodo(
                 username,
                 todo.getDescription(),
                 todo.getTargetDate(),

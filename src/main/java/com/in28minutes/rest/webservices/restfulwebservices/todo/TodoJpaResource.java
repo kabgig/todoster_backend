@@ -9,11 +9,11 @@ import java.util.List;
 @RestController
 public class TodoJpaResource {
 
-    private TodoService todoService;
+    private NotUsedTodoService notUsedTodoService;
     private TodoRepository todoRepository;
 
-    public TodoJpaResource(TodoService todoService, TodoRepository todoRepository) {
-        this.todoService = todoService;
+    public TodoJpaResource(NotUsedTodoService notUsedTodoService, TodoRepository todoRepository) {
+        this.notUsedTodoService = notUsedTodoService;
         this.todoRepository = todoRepository;
     }
 
