@@ -1,13 +1,26 @@
 package com.in28minutes.rest.webservices.restfulwebservices.users;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String password;
+    private boolean enabled;
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+//    public User(Long id, String username, String password, boolean enabled) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.enabled = enabled;
+//    }
 
     public String getUsername() {
         return username;
@@ -25,11 +38,29 @@ public class User {
         this.password = password;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }
