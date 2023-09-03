@@ -1,10 +1,12 @@
 package com.in28minutes.rest.webservices.restfulwebservices.basic.jwt;
 
+import com.in28minutes.rest.webservices.restfulwebservices.users.CustomUserDetailsService;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -41,6 +43,13 @@ import java.util.UUID;
 @EnableMethodSecurity
 public class JwtSecurityConfig {
 
+    private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    public JwtSecurityConfig(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -57,6 +66,7 @@ public class JwtSecurityConfig {
                                         .permitAll()
                                         //.requestMatchers(PathRequest.toH2Console()).permitAll()
                                         .mvcMatchers("/createuser/").permitAll()
+                                       // .mvcMatchers("/user/{username}").permitAll()
                                         .anyRequest()
                                         .authenticated()) // (3)
                 .oauth2ResourceServer(
@@ -76,7 +86,7 @@ public class JwtSecurityConfig {
     public AuthenticationManager authenticationManager(
             UserDetailsService userDetailsService) {
         var authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setUserDetailsService(customUserDetailsService);
         return new ProviderManager(authenticationProvider);
     }
 
