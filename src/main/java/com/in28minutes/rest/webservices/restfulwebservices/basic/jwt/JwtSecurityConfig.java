@@ -89,17 +89,17 @@ public class JwtSecurityConfig {
         authenticationProvider.setUserDetailsService(customUserDetailsService);
         return new ProviderManager(authenticationProvider);
     }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("in28minutes")
-                .password("{noop}dummy")
-                .authorities("read")
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
+//NOT USED
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user = User.withUsername("in28minutes")
+//                .password("{noop}dummy")
+//                .authorities("read")
+//                .roles("USER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
