@@ -21,6 +21,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -86,17 +88,11 @@ public class JwtSecurityConfig {
         authenticationProvider.setUserDetailsService(customUserDetailsService);
         return new ProviderManager(authenticationProvider);
     }
-//NOT USED
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.withUsername("ansar")
-//                .password("{noop}dummy")
-//                .authorities("read")
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
@@ -140,7 +136,6 @@ public class JwtSecurityConfig {
                     "Unable to generate an RSA Key Pair", e);
         }
     }
-
 }
 
 

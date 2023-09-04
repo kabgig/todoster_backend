@@ -1,19 +1,25 @@
 package com.in28minutes.rest.webservices.restfulwebservices.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UsersResource {
     private final UserService userService;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsersResource(UserService userService) {
+    public UsersResource(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("createuser/")
     public void createUser(@RequestBody User user){
+        String plainPassword = user.getPassword();
+        String hashedPassword = passwordEncoder.encode(plainPassword); // Hash the password
+        user.setPassword(hashedPassword);
         userService.saveUser(user);
         System.out.println(user + " is saved to DB");
     }
@@ -23,15 +29,4 @@ public class UsersResource {
         System.out.println(user);
         return user;
     }
-
-//    public void registerUser(String username, String rawPassword) {
-//        //  String encodedPassword = passwordEncoder.encode(rawPassword);
-//
-//        User user = new User();
-//        user.setUsername(username);
-//        // user.setPassword(encodedPassword);
-//        user.setEnabled(true); // Enable the user, or set it based on your requirements
-//
-//        userRepository.save(user);
-//    }
 }
