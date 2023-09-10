@@ -6,27 +6,23 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UsersResource {
-    private final UserService userService;
-    private PasswordEncoder passwordEncoder;
+    private final UserFacade userFacade;
 
     @Autowired
-    public UsersResource(UserService userService, PasswordEncoder passwordEncoder) {
-        this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
+    public UsersResource(UserFacade userFacade) {
+        this.userFacade = userFacade;
     }
 
     @PostMapping("createuser/")
-    public void createUser(@RequestBody User user){
-        String plainPassword = user.getPassword();
-        String hashedPassword = passwordEncoder.encode(plainPassword); // Hash the password
-        user.setPassword(hashedPassword);
-        userService.saveUser(user);
-        System.out.println(user + " is saved to DB");
+    public void createUser(@RequestBody UserDTO userDTO){
+        userFacade.createUser(userDTO);
+        System.out.println(userDTO.getUsername() + " is saved to DB");
     }
+
     @GetMapping("user/{username}")
-    public User getUser(@PathVariable String username){
-        User user = userService.findUserByUsername(username);
-        System.out.println(user);
-        return user;
+    public UserDTO getUser(@PathVariable String username) {
+        UserDTO userDTO = userFacade.getUserByUsername(username);
+        System.out.println(userDTO);
+        return userDTO;
     }
 }

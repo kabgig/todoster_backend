@@ -8,47 +8,42 @@ import java.util.List;
 
 @RestController
 public class TodoJpaResource {
+    //private TodoRepository todoRepository;
+    private final TodoFacade todoFacade;
 
-    private NotUsedTodoService notUsedTodoService;
-    private TodoRepository todoRepository;
-
-    public TodoJpaResource(NotUsedTodoService notUsedTodoService, TodoRepository todoRepository) {
-        this.notUsedTodoService = notUsedTodoService;
-        this.todoRepository = todoRepository;
+    public TodoJpaResource(/*TodoRepository todoRepository, */TodoFacade todoFacade) {
+       // this.todoRepository = todoRepository;
+        this.todoFacade = todoFacade;
     }
 
     @GetMapping("users/{username}/todos")
-    public List<Todo> retrieveTodos(@PathVariable String username){
-        return todoRepository.findByUsername(username);
+    public List<TodoDTO> retrieveTodos(@PathVariable String username){
+        return todoFacade.retrieveTodos(username);
     }
 
     @GetMapping("users/{username}/todos/{id}")
-    public Todo retrieveTodo(@PathVariable String username, @PathVariable int id){
-        return todoRepository.findById(id).get();
+    public TodoDTO retrieveTodo(@PathVariable String username, @PathVariable int id){
+        return todoFacade.retrieveTodo(username, id);
     }
 
     @DeleteMapping("users/{username}/todos/{id}")
     public ResponseEntity<Object> deleteTodo(@PathVariable String username, @PathVariable int id){
-        todoRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return todoFacade.deleteTodo(id);
     }
 
     @PutMapping("users/{username}/todos/{id}")
-    public Todo updateTodo(
+    public TodoDTO updateTodo(
             @PathVariable String username,
             @PathVariable int id,
-            @RequestBody Todo todo){
+            @RequestBody TodoDTO todoDTO){
 
-        todoRepository.save(todo);
-        return todo;
+        return todoFacade.updateTodo(id, todoDTO);
     }
 
     @PostMapping("users/{username}/todos")
-    public Todo createTodo(
+    public TodoDTO createTodo(
             @PathVariable String username,
-            @RequestBody Todo todo){
-        todo.setUsername(username);
-        todo.setId(null);
-        return todoRepository.save(todo);
+            @RequestBody TodoDTO todoDTO){
+        return todoFacade.createTodo(username, todoDTO);
     }
 }
