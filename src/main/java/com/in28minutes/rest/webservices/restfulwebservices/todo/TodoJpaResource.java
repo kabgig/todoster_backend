@@ -37,7 +37,7 @@ public class TodoJpaResource {
             @PathVariable int id,
             @RequestBody TodoDTO todoDTO){
 
-        return todoFacade.updateTodo(id, todoDTO);
+        return todoFacade.updateTodo(id, todoDTO, username);
     }
 
     @PostMapping("users/{username}/todos")

@@ -11,12 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
-   // private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository/*, PasswordEncoder passwordEncoder*/) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-       // this.passwordEncoder = passwordEncoder;
     }
 
     public User findUserByUsername(String username) {

@@ -33,9 +33,10 @@ public class TodoFacade {
         return ResponseEntity.noContent().build();
     }
 
-    public TodoDTO updateTodo(int id, TodoDTO todoDTO) {
+    public TodoDTO updateTodo(int id, TodoDTO todoDTO, String username) {
         Todo updatedTodo = mapToTodoEntity(todoDTO);
         updatedTodo.setId(id);
+        updatedTodo.setUsername(username);
         Todo savedTodo = todoService.updateTodo(updatedTodo);
         return mapToTodoDTO(savedTodo);
     }
