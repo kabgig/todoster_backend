@@ -1,6 +1,6 @@
 package com.in28minutes.rest.webservices.restfulwebservices.basic.jwt;
 
-import com.in28minutes.rest.webservices.restfulwebservices.users.UserService;
+import com.in28minutes.rest.webservices.restfulwebservices.users.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,21 +15,21 @@ public class JwtAuthenticationController {
 
     private final JwtTokenService tokenService;
     private final AuthenticationManager authenticationManager;
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     private PasswordEncoder passwordEncoder;
 
     public JwtAuthenticationController(JwtTokenService tokenService,
-                                       AuthenticationManager authenticationManager, UserService userService, PasswordEncoder passwordEncoder) {
+                                       AuthenticationManager authenticationManager, UserServiceImpl userServiceImpl, PasswordEncoder passwordEncoder) {
         this.tokenService = tokenService;
         this.authenticationManager = authenticationManager;
-        this.userService = userService;
+        this.userServiceImpl = userServiceImpl;
         this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<JwtTokenResponse> generateToken(
             @RequestBody JwtTokenRequest jwtTokenRequest) {
-        String hashedPassword = userService
+        String hashedPassword = userServiceImpl
                 .findUserByUsername(jwtTokenRequest.username())
                 .getPassword();
 

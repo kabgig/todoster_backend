@@ -1,6 +1,6 @@
 package com.in28minutes.rest.webservices.restfulwebservices.basic.jwt;
 
-import com.in28minutes.rest.webservices.restfulwebservices.users.UserService;
+import com.in28minutes.rest.webservices.restfulwebservices.users.UserServiceImpl;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -42,10 +42,10 @@ import java.util.UUID;
 @EnableMethodSecurity
 public class JwtSecurityConfig {
 
-    private UserService customUserDetailsService;
+    private UserServiceImpl customUserDetailsService;
 
     @Autowired
-    public JwtSecurityConfig(UserService customUserDetailsService) {
+    public JwtSecurityConfig(UserServiceImpl customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
     }
 

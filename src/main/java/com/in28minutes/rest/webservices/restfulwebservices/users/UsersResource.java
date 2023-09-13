@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UsersResource {
-    private final UserFacade userFacade;
+    private final UserFacadeInterface userFacade;
 
     @Autowired
-    public UsersResource(UserFacade userFacade) {
+    public UsersResource(UserFacadeInterface userFacade) {
         this.userFacade = userFacade;
     }
 

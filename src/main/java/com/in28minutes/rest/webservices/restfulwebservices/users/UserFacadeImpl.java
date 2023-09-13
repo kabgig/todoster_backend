@@ -7,11 +7,11 @@ import static com.in28minutes.rest.webservices.restfulwebservices.utils.Mappers.
 import static com.in28minutes.rest.webservices.restfulwebservices.utils.Mappers.mapUserToUserDTO;
 
 @Service
-public class UserFacade {
-    private final UserService userService;
+public class UserFacadeImpl implements UserFacadeInterface {
+    private final UserServiceInterface userService;
 
     @Autowired
-    public UserFacade(UserService userService) {
+    public UserFacadeImpl(UserServiceInterface userService) {
         this.userService = userService;
     }
 

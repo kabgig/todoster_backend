@@ -1,5 +1,6 @@
 package com.in28minutes.rest.webservices.restfulwebservices.todo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,9 +8,10 @@ import java.util.List;
 
 @RestController
 public class TodoJpaResource {
-    private final TodoFacade todoFacade;
+    private final TodoFacadeInterface todoFacade;
 
-    public TodoJpaResource(TodoFacade todoFacade) {
+    @Autowired
+    public TodoJpaResource(TodoFacadeInterface todoFacade) {
         this.todoFacade = todoFacade;
     }
 

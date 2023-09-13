@@ -11,11 +11,11 @@ import static com.in28minutes.rest.webservices.restfulwebservices.utils.Mappers.
 import static com.in28minutes.rest.webservices.restfulwebservices.utils.Mappers.mapToTodoEntity;
 
 @Service
-public class TodoFacade {
-    private final TodoService todoService;
+public class TodoFacadeImpl implements TodoFacadeInterface {
+    private final TodoServiceInterface todoService;
 
     @Autowired
-    public TodoFacade(TodoService todoService) {
+    public TodoFacadeImpl(TodoServiceInterface todoService) {
         this.todoService = todoService;
     }
 
