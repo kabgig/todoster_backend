@@ -1,7 +1,8 @@
 package com.in28minutes.rest.webservices.restfulwebservices.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,9 +15,10 @@ public class UsersResource {
     }
 
     @PostMapping("createuser/")
-    public void createUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO){
         userFacade.createUser(userDTO);
         System.out.println(userDTO.getUsername() + " is saved to DB");
+        return ResponseEntity.status(HttpStatus.OK).body("User created successfully");
     }
 
     @GetMapping("user/{username}")

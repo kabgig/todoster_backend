@@ -59,7 +59,7 @@ public class JwtSecurityConfig {
                                         SessionCreationPolicy.STATELESS)) // (2)
                 .authorizeRequests(
                         auth ->
-                                auth.mvcMatchers("/","/authenticate", "/actuator", "/actuator/*")
+                                auth.mvcMatchers("/","/authenticate", "/actuator", "/actuator/*","/hello-world")
                                         .permitAll()
                                         .antMatchers(HttpMethod.OPTIONS, "/**")
                                         .permitAll()

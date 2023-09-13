@@ -1,6 +1,5 @@
 package com.in28minutes.rest.webservices.restfulwebservices.todo;
 
-import com.in28minutes.rest.webservices.restfulwebservices.todo.repository.TodoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,11 +7,9 @@ import java.util.List;
 
 @RestController
 public class TodoJpaResource {
-    //private TodoRepository todoRepository;
     private final TodoFacade todoFacade;
 
-    public TodoJpaResource(/*TodoRepository todoRepository, */TodoFacade todoFacade) {
-       // this.todoRepository = todoRepository;
+    public TodoJpaResource(TodoFacade todoFacade) {
         this.todoFacade = todoFacade;
     }
 
@@ -36,7 +33,6 @@ public class TodoJpaResource {
             @PathVariable String username,
             @PathVariable int id,
             @RequestBody TodoDTO todoDTO){
-
         return todoFacade.updateTodo(id, todoDTO, username);
     }
 

@@ -8,13 +8,6 @@ public class TodoDTO {
     private LocalDate targetDate;
     private boolean done;
 
-//    public TodoDTO(Integer id, String description, LocalDate targetDate, boolean done) {
-//        this.id = id;
-//        this.description = description;
-//        this.targetDate = targetDate;
-//        this.done = done;
-//    }
-
     public Integer getId() {
         return id;
     }

@@ -2,7 +2,6 @@ com/in28minutes/rest/webservices/restfulwebservices/todo/TodoService.class
 com/in28minutes/rest/webservices/restfulwebservices/basic/jwt/JwtAuthenticationController.class
 com/in28minutes/rest/webservices/restfulwebservices/basic/jwt/BCrypt.class
 com/in28minutes/rest/webservices/restfulwebservices/basic/jwt/JwtSecurityConfig.class
-com/in28minutes/rest/webservices/restfulwebservices/helloworld/HelloWorldController.class
 com/in28minutes/rest/webservices/restfulwebservices/users/UsersResource.class
 com/in28minutes/rest/webservices/restfulwebservices/RestfulWebServicesApplication.class
 com/in28minutes/rest/webservices/restfulwebservices/basic/jwt/JwtTokenRequest.class

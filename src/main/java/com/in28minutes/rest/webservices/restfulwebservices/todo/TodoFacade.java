@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.in28minutes.rest.webservices.restfulwebservices.utils.Mappers.mapToTodoDTO;
+import static com.in28minutes.rest.webservices.restfulwebservices.utils.Mappers.mapToTodoEntity;
+
 @Service
 public class TodoFacade {
     private final TodoService todoService;
@@ -19,7 +22,7 @@ public class TodoFacade {
     public List<TodoDTO> retrieveTodos(String username) {
         List<Todo> todos = todoService.getTodosByUsername(username);
         return todos.stream()
-                .map(this::mapToTodoDTO)
+                .map(todo -> mapToTodoDTO(todo))
                 .collect(Collectors.toList());
     }
 
@@ -46,23 +49,6 @@ public class TodoFacade {
         todo.setUsername(username);
         Todo savedTodo = todoService.createTodo(todo);
         return mapToTodoDTO(savedTodo);
-    }
-
-    private TodoDTO mapToTodoDTO(Todo todo) {
-        TodoDTO todoDTO = new TodoDTO();
-        todoDTO.setId(todo.getId());
-        todoDTO.setDescription(todo.getDescription());
-        todoDTO.setTargetDate(todo.getTargetDate());
-        todoDTO.setDone(todo.isDone());
-        return todoDTO;
-    }
-
-    private Todo mapToTodoEntity(TodoDTO todoDTO) {
-        Todo todo = new Todo();
-        todo.setDescription(todoDTO.getDescription());
-        todo.setTargetDate(todoDTO.getTargetDate());
-        todo.setDone(todoDTO.isDone());
-        return todo;
     }
 }
 

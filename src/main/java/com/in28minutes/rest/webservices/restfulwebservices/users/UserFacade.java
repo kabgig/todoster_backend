@@ -3,6 +3,9 @@ package com.in28minutes.rest.webservices.restfulwebservices.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.in28minutes.rest.webservices.restfulwebservices.utils.Mappers.mapUserDTOtoUser;
+import static com.in28minutes.rest.webservices.restfulwebservices.utils.Mappers.mapUserToUserDTO;
+
 @Service
 public class UserFacade {
     private final UserService userService;
@@ -20,23 +23,5 @@ public class UserFacade {
     public UserDTO getUserByUsername(String username) {
         User user = userService.findUserByUsername(username);
         return mapUserToUserDTO(user);
-    }
-
-    private UserDTO mapUserToUserDTO(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setUsername(user.getUsername());
-        userDTO.setPassword(user.getPassword());
-        userDTO.setEnabled(user.isEnabled());
-        return userDTO;
-    }
-
-    private User mapUserDTOtoUser(UserDTO userDTO) {
-        User user = new User();
-        user.setId(userDTO.getId());
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
-        user.setEnabled(userDTO.isEnabled());
-        return user;
     }
 }
