@@ -1,17 +1,24 @@
 package com.in28minutes.rest.webservices.restfulwebservices.restassured;
 
+import static io.restassured.RestAssured.*;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import io.restassured.RestAssured;
-import org.junit.Before;
-import org.junit.Test;
+import io.restassured.response.Response;
+import org.testng.TestNG;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+import org.testng.Assert;
+import static org.hamcrest.Matchers.*;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
 public class RestAssuredApiTests {
 
-    @Before
+    @BeforeSuite
     public void setUp() {
-        RestAssured.baseURI = "http://localhost:5001"; // Replace with your application's actual base URL
+        baseURI = "http://localhost:5001";
     }
 
     @Test
@@ -25,6 +32,6 @@ public class RestAssuredApiTests {
                 .post("/createuser/")
                 .then()
                 .statusCode(200)
-                .body("message", equalTo("User created successfully"));
+                .body(equalTo("User created successfully"));
     }
 }
