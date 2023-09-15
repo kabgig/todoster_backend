@@ -39,4 +39,14 @@ public class TodoDTO {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    @Override
+    public String toString() {
+        return "TodoDTO{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", targetDate=" + targetDate +
+                ", done=" + done +
+                '}';
+    }
 }
